@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>❤</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap'); /* Красивый мягкий шрифт */
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ab7495; 
+        }
+        img {
+            max-width: 320px;
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 15px;
+            border: 5px solid white;
+            box-shadow: 0px 5px 15px rgb(222, 165, 240);
+        }
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+        .main-button {
+            padding: 14px 28px;
+            font-size: 20px;
+            border: none;
+            cursor: pointer;
+            background-color: white;
+            color: rgb(170, 67, 141);
+            border-radius: 20px;
+            width: 140px;
+            height: 60px;
+            box-shadow: 2px 2px 10px rgb(222, 165, 240);
+            transition: 0.3s;
+            font-family: 'Pacifico', cursive;
+        }
+        .main-button:hover {
+            background-color: #f0f0f0;
+        }
+        .secondary-buttons {
+            display: flex;
+            gap: 25px;
+            margin-top: 10px;
+        }
+        .secondary-buttons button {
+            font-size: 22px;
+            border: none;
+            cursor: pointer;
+            background-color: white;
+            color: red;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            box-shadow: 2px 2px 10px rgb(222, 165, 240);
+            transition: 0.3s, transform 0.3s, opacity 0.5s ease-out;
+            font-family: 'Pacifico', cursive;
+            position: relative;
+        }
+        .secondary-buttons button::before {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        #yesButton::before {
+            content: "Да ❤️";
+            color: rgb(170, 67, 141);
+        }
+        #noButton::before {
+            content: "Неа 💔";
+            color: rgb(170, 67, 141);
+        }
+        .secondary-buttons button:hover {
+            background-color: pink;
+        }
+    </style>
+</head>
+<body>
+
+    <img src="https://i.pinimg.com/736x/d6/f2/38/d6f238dcf1e585ef7bc421a18cc7538f.jpg" alt="❤">
+
+    <div class="button-container">
+        <button class="main-button">Ти гей?</button>
+        <div class="secondary-buttons">
+            <button id="yesButton" onclick="yesAction()"></button>
+            <button id="noButton" onclick="noAction()"></button>
+        </div>
+    </div>
+
+    <script>
+        let yesSize = 1;  
+        let noSize = 1;   
+        const minSize = 0.3; 
+
+        function showCustomAlert(message) {
+            let alertBox = document.createElement("div");
+            alertBox.innerHTML = message;
+            alertBox.style.position = "fixed";
+            alertBox.style.top = "50%";
+            alertBox.style.left = "50%";
+            alertBox.style.transform = "translate(-50%, -50%)";
+            alertBox.style.background = "rgba(255, 182, 193, 0.9)";
+            alertBox.style.color = "white";
+            alertBox.style.fontSize = "24px";
+            alertBox.style.padding = "20px 30px";
+            alertBox.style.borderRadius = "15px";
+            alertBox.style.boxShadow = "0 5px 15px rgba(0, 0, 0, 0.3)";
+            alertBox.style.fontFamily = "'Pacifico', cursive";
+            alertBox.style.textAlign = "center";
+            document.body.appendChild(alertBox);
+
+            setTimeout(() => {
+                alertBox.style.opacity = "0";
+                setTimeout(() => alertBox.remove(), 500);
+            }, 1500);
+        }
+
+        function yesAction() {
+            let yesButton = document.getElementById("yesButton");
+            let noButton = document.getElementById("noButton");
+
+            showCustomAlert("Це було панятно"); 
+
+            yesSize = 1;
+            noSize = 1;
+            yesButton.style.transform = `scale(${yesSize})`;
+            noButton.style.transform = `scale(${noSize})`;
+            noButton.style.opacity = "1"; 
+            noButton.style.display = "block"; 
+        }
+
+        function noAction() {
+            let yesButton = document.getElementById("yesButton");
+            let noButton = document.getElementById("noButton");
+
+            let confirmChoice = confirm("Київстар напевно лагає, спробуй ще раз!"); 
+
+            if (confirmChoice) {
+                yesSize += 0.2;  
+                noSize = Math.max(noSize - 0.1, minSize); 
+
+                if (noSize === minSize) {
+                    noButton.style.opacity = "0"; 
+                    setTimeout(() => {
+                        noButton.style.display = "none"; 
+                    }, 500);
+                }
+            }
+
+            yesButton.style.transform = `scale(${yesSize})`;
+            noButton.style.transform = `scale(${noSize})`;
+        }
+    </script>
+
+</body>
+</html>
+
+
